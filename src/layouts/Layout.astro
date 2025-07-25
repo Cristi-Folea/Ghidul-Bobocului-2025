@@ -1,22 +1,83 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import Footer from "../components/footer.astro";
+//import PreloadPages from "../components/PreloadPages.astro";
+
+const animation = {
+	old: [
+		{
+			name: "fade-out",
+			duration: "300ms",
+			easing: "ease-in",
+			fillMode: "both",
+		},
+		{
+			name: "slide-out",
+			duration: "600ms",
+			easing: "ease-in",
+			fillMode: "both",
+		},
+	],
+	new: [
+		{
+			name: "fade-in",
+			delay: "600ms",
+			duration: "600ms",
+			easing: "ease-in-out",
+			fillMode: "both",
+		},
+		{
+			name: "slide-in",
+			duration: "600ms",
+			easing: "ease-in-out",
+			fillMode: "both",
+		},
+	],
+};
+
+const customTransition = {
+	forwards: animation,
+	backwards: animation,
+};
+
+const { isBookPage = false, showFooter = true } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html transition:animate={customTransition}>
 	<head>
-		<meta charset="UTF-8" />
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/media/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Ghidul Bobocului</title>
+		<link rel="stylesheet" href="/styles/style.css" />
+
+		<!-- !!! NUMARUL DE PAGINI DIN  public/scripts/bookAnimation.js !!! -->
+		<!-- !!!   SI DIN <HEAD> DIN    src/pages/ghid.astro            !!! -->
+		<!-- <PreloadPages numberOfPages="88" /> -->
+
+		<!-- <ViewTransitions /> -->
 	</head>
+
 	<body>
-		<slot />
+		<main class="flex">
+			<slot />
+		</main>
+
+		{ showFooter && <Footer/>}
+
+		{isBookPage && 
+			<script src="/scripts/bookAnimation.js"></script>
+			<script src="/scripts/bookAnimationNarrow.js"></script>
+		}
 	</body>
 </html>
 
 <style>
-	html,
-	body {
+	* {
+		padding: 0;
 		margin: 0;
-		width: 100%;
-		height: 100%;
+		box-sizing: border-box;
 	}
 </style>
