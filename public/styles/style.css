@@ -101,6 +101,7 @@ header {
   padding: 1em;
   grid-area: txt;
   min-height: 14em;
+  line-height: 1.3em;
   /*   max-height: 15em; */
   /* overflow-x: scroll; */
   text-align: left;
@@ -117,13 +118,35 @@ header {
   aspect-ratio: 9/16;
   min-width: auto;
 }
+
+.container-grid .carte img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .container-grid .parteneri {
-  box-shadow: 0 0 4vw rgba(221, 217, 209, 0.682);
-  background-color: #03120e;
+  /* box-shadow: 0 0 4vw rgba(221, 217, 209, 0.682); */
+  /* background-color: #03120e; */
+  /* border: 0.2vw;
+  border-style: solid;
+  border-color: linear-gradient(60deg, rgb(56, 56, 56), rgb(10, 10, 10)); */
+  background-image: linear-gradient(60deg, rgb(26, 26, 26), rgb(10, 10, 10));
   grid-area: parteneri;
   min-height: min(3rem);
 }
 
+.container-grid .border {
+  background: linear-gradient(60deg, rgb(56, 56, 56), rgb(15, 15, 15));
+  padding: 1px;
+}
+
+.container-grid .parteneri .inner {
+  background-image: linear-gradient(60deg, rgb(26, 26, 26), rgb(10, 10, 10));
+  grid-area: parteneri;
+  min-height: min(3rem);
+  min-width: 100%;
+  border-radius: calc(1em - 1px);
+}
 .harta {
   padding: 1em;
   iframe {
