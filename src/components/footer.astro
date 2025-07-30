@@ -1,1 +1,79 @@
-<div></div>
+<div class="footer-container flex flex-orizontal">
+  <a href="https://www.tiktok.com/@ghidul_bobocului2024" class="tiktok flex">
+    <img src="../../public/media/icons/tik_tok_white_icon.svg" alt="" />
+    <p>Ghidul Bobocului</p>
+  </a>
+
+  <a
+    href="https://www.facebook.com/events/1471587386875032/?_rdr&ref=110"
+    class="facebook flex"
+    ><img src="../../public/media/icons/facebook_white_icon.svg" alt="" />
+    <p>BEST Open Day</p>
+  </a>
+
+  <a href="https://bestcj.ro/" class="best flex">
+    <img
+      src="../../public/media/icons/BEST_white_icon.svg"
+      alt="beeest"
+      height="50px"
+    />
+    <p>BEST</p>
+  </a>
+</div>
+
+<style>
+  .footer-container {
+    min-width: 100vw;
+    min-height: min(15vh, 10vw);
+    background-color: #113537;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+  }
+
+  .footer-container a {
+    color: white;
+    margin: 10px 0;
+  }
+
+  .footer-container a p {
+    font-size: clamp(0.3rem, calc(0.7rem + 1vw), 1.6rem);
+  }
+
+  .footer-container a img {
+    width: clamp(1rem, 3vw, 40px);
+  }
+
+  /*  .footer-container a.best {
+    margin: -5px;
+  } */
+
+  .footer-container .best img {
+    transform: scale(1.3);
+  }
+
+  .footer-container a:visited,
+  :link,
+  :active :hover {
+    text-decoration: none;
+  }
+
+  .footer-container .facebook {
+    /* margin-right: 80px; */
+    /* padding-right: 60px; */
+  }
+
+  .footer-container .best {
+    margin: 0 2.8vw;
+  }
+
+  .footer-container .tiktok img {
+    margin-right: 4px;
+  }
+  .footer-container .facebook img {
+    margin-right: 4px;
+  }
+  .footer-container .best img {
+    margin-right: 2px;
+  }
+</style>

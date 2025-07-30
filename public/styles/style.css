@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&display=swap");
+
+:root {
+  --culoare_background_dark_mode: hsl(240, 30%, 21%);
+  --culoare-background_light_mode: hsl(240, 30%, 80%);
+  --font-roboto-mono: "Roboto", "__Roboto_Mono_43fb55",
+    "__Roboto_Mono_Fallback_43fb55", "Roboto";
+}
+
+/* "Texturina" */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #03120e;
+  background-image: url(../media/elemente/noise-tile-dark.svg);
+  font-size: clamp(1rem, calc(0.2rem + 1vw), 2rem);
+  font-family: var(--font-roboto-mono);
+}
+
+main {
+  /* background-color: rgba(172, 169, 169, 0.682); */
+  max-width: max(75%, 1024px);
+  min-height: 100vh;
+  /* max-height: 100vh; */
+  margin: 0 auto;
+  /* background-color: #f76f8e; */
+  flex-direction: column;
+
+  /* max-height: 1024px; */
+  height: auto;
+  /*   box-shadow: 0 0 3vw rgba(172, 169, 169, 0.682); */
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+header {
+  margin-bottom: min(2em, 1vw);
+  width: 100%;
+  display: flex;
+}
+
+#banner img {
+  width: 100%;
+  display: block;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-grid {
+  width: 100%;
+  height: auto;
+  display: grid;
+  gap: 1em;
+  /*   border: 0.5em;
+  border-color: #37505c;
+  border-style: solid; */
+
+  grid-template-areas:
+    "txt carte"
+    "txt carte"
+    "txt carte"
+    "parteneri parteneri";
+
+  grid-template-columns: 10fr 5fr;
+  padding: 1.5rem;
+}
+
+.container-grid > div {
+  min-height: 8em;
+  min-width: 8em;
+  text-align: center;
+
+  color: whitesmoke;
+  /* border: 4px;
+  border-style: solid; */
+  /* background-color: #96616b; */
+  /*   box-shadow: 0 0 4vw rgba(221, 217, 209, 0.682); */
+  border-radius: 1em;
+}
+
+.container-grid .txt {
+  padding: 1em;
+  grid-area: txt;
+  min-height: 14em;
+  /*   max-height: 15em; */
+  /* overflow-x: scroll; */
+  text-align: left;
+  white-space: normal;
+  color: whitesmoke;
+
+  h1 {
+    font-size: clamp(1.8rem, calc(0.5rem + 2vw), 4rem);
+    margin-bottom: 0.5em;
+  }
+}
+.container-grid .carte {
+  grid-area: carte;
+  aspect-ratio: 9/16;
+  min-width: auto;
+}
+.container-grid .parteneri {
+  box-shadow: 0 0 4vw rgba(221, 217, 209, 0.682);
+  background-color: #03120e;
+  grid-area: parteneri;
+  min-height: min(3rem);
+}
+
+.harta {
+  padding: 1em;
+  iframe {
+    border-radius: 10px;
+    width: 100%;
+    /* margin: 0 auto; */
+    /*   padding: 0 1em; */
+  }
+}
+
+@media (max-width: 800px) {
+  .container-grid {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* @media (max-width: 800px) {
+  .container-grid {
+    grid-template-columns: 1fr 1fr;
+
+    .carte {
+      min-width: 5rem;
+    }
+  }
+} */

@@ -1,6 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Footer from "../components/footer.astro";
+import Footer from "../components/Footer.astro";
 //import PreloadPages from "../components/PreloadPages.astro";
 
 const animation = {
@@ -40,7 +40,7 @@ const customTransition = {
 	backwards: animation,
 };
 
-const { isBookPage = false, showFooter = true } = Astro.props;
+const { isBookPage = false, showFooter = true, mainClass="" } = Astro.props;
 ---
 
 <!doctype html>
@@ -51,7 +51,7 @@ const { isBookPage = false, showFooter = true } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Ghidul Bobocului</title>
-		<link rel="stylesheet" href="/styles/style.css" />
+		<link rel="stylesheet" href="/public/styles/style.css">
 
 		<!-- !!! NUMARUL DE PAGINI DIN  public/scripts/bookAnimation.js !!! -->
 		<!-- !!!   SI DIN <HEAD> DIN    src/pages/ghid.astro            !!! -->
@@ -61,7 +61,7 @@ const { isBookPage = false, showFooter = true } = Astro.props;
 	</head>
 
 	<body>
-		<main class="flex">
+		<main class={mainClass}>
 			<slot />
 		</main>
 
@@ -74,10 +74,3 @@ const { isBookPage = false, showFooter = true } = Astro.props;
 	</body>
 </html>
 
-<style>
-	* {
-		padding: 0;
-		margin: 0;
-		box-sizing: border-box;
-	}
-</style>
