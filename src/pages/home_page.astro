@@ -9,7 +9,7 @@ import Layout from "../layouts/Layout.astro";
 
   <div class="container-grid">
     <div class="txt">
-      <h1>Despre acest ghid</h1>
+      <h1>Despre acest ghid:</h1>
       <br />
       Sigur ești nerăbdător să afli secretele studenției, așa că rămâi cu noi! <br
       /><br />
@@ -39,23 +39,37 @@ import Layout from "../layouts/Layout.astro";
       >. Alătură-te nouă pe data de <b>2 octombrie 2024</b> la <b>Enigma Café</b
       >, ora <b>18:00</b>.
     </div>
-    <div class="carte flex">
+    <div class="carte flex flex-column">
+      <h1>Carte digitală:</h1>
       <img
         src="../../public/media/elemente/enchanted-magical-book-icon-isolated-3d-render-illustration.png"
         alt="Carte PDF"
       />
     </div>
     <div class="parteneri border flex">
-      <div class="inner flex">PARTENERI</div>
+      <div class="inner flex">
+        <a href="/parteneri"><b>PARTENERI</b></a>
+      </div>
     </div>
   </div>
   <div class="harta">
     <iframe
-      src="https://www.google.com/maps/d/u/0/embed?mid=1vu4DmU8LC0EWxM0wgFvR0wHW1zyk7iE&ehbc=2E312F&noprof=1"
-      width="640"
-      height="480"></iframe>
+      src="https://www.google.com/maps/d/u/0/embed?mid=1vu4DmU8LC0EWxM0wgFvR0wHW1zyk7iE&ehbc=2E312F&noprof=1&panel=1&sidebar=1"
+      width="1280"
+      height="400"></iframe>
   </div>
 </Layout>
+
+<style>
+  body {
+    min-height: 100vh;
+    height: 100vh;
+  }
+
+  main {
+    min-height: 100vh;
+  }
+</style>
 
 <!-- 
 <div class="grid flex">

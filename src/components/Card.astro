@@ -1,0 +1,27 @@
+---
+const {
+  link,
+  nume = "Nume placeholder",
+  logo = "",
+  scale = "1",
+  border = "",
+} = Astro.props;
+---
+
+<div class="card">
+  <a href={link}>
+    <div class="nume">{nume}</div>
+    <div class="logo">
+      <img src={logo} class={border} style=`scale: ${scale};` />
+    </div>
+  </a>
+</div>
+
+<style>
+  .card {
+    font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+      "Arial", sans-serif;
+  }
+</style>
+
+<!-- deci la css cu variabile, trebuie sa pun ``. iar la normal pun {} -->

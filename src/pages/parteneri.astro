@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/card.astro";
+---
+
+<Layout>
+  <div class="empty"></div>
+  <div class="multumire">
+    <h1>Mulțumim partenerilor noștri pentru tot sprijinul acordat.</h1>
+  </div>
+  <ul class="grid-parteneri">
+    <li><Card link="" , nume="" , scale="" , border="" /></li>
+    <li><Card link="" , nume="" , scale="" , border="" /></li>
+    <li><Card link="" , nume="" , scale="" , border="" /></li>
+    <li><Card link="" , nume="" , scale="" , border="" /></li>
+    <li><Card link="" , nume="" , scale="" , border="" /></li>
+  </ul>
+</Layout>
+
+<style>
+  .empty {
+    height: 6em;
+  }
+
+  .multumire {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 3em;
+    height: 6em;
+    width: 100vw;
+    background-color: rgba(245, 245, 245, 0.065);
+
+    text-align: center;
+    font-size: clamp(0.6rem, calc(0.4rem + 1vw), 1.5rem);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+  }
+  .grid-parteneri {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3em;
+    list-style: none;
+
+    border: 0.5em;
+    border-color: #37505c;
+    border-style: solid;
+  }
+
+  .grid-parteneri > li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6em;
+    width: 28em;
+    border: 0.1em;
+    border-color: aqua;
+    border-style: solid;
+  }
+</style>
