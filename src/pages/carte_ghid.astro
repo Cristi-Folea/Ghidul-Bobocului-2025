@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Book from "../components/Book.astro";
+
+const nr_pagini = 10;
+---
+
+<Layout isGhid={true}>
+  <div class="ghid-wrapper">
+    <button id="prev" onclick=""></button>
+    <button id="next" onclick=""></button>
+    <button id="buton-cuprins" onclick="">CUPRINS</button
+    ><!-- mai trebuie pus ce sa faca la click -->
+
+    <div id="book">
+      <Book nr_foi={nr_pagini / 2} />
+    </div>
+  </div>
+</Layout>

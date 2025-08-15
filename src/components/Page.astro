@@ -1,0 +1,21 @@
+---
+const { front_img, back_img, pag_cuprins = false, nr_pagina } = Astro.props;
+---
+
+<div id=`page${nr_pagina}` class="page">
+  <div class="fornt">
+    <div class="front-content">
+      <img data-src=`${front_img}` />
+    </div>
+  </div>
+  <div class="back">
+    <div class="back-content">
+        <img data-src=`${back_img}` style="position absolute" />
+        {
+            pag_cuprins && (
+                
+        )
+        }
+    </div>
+  </div>
+</div>

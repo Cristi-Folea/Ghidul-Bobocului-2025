@@ -1,0 +1,31 @@
+---
+const { nr_foi } = Astro.props;
+import Page from "./Page.astro";
+
+function legare_imagini(index: number) {
+  const front = `../../public/media/pagini_carte/ghid-${2 * (index + 1) - 1}.webp`;
+  const back = `../../public/media/pagini_carte/ghid-${2 * (index + 1)}.webp`;
+  return { front, back };
+}
+---
+
+{
+  Array.from({ length: nr_foi }).map(function (_, index) {
+    const { front, back } = legare_imagini(index);
+    const e_curprins =
+      2 * (index + 1) === 6; /* operatroul stric de egalitate */
+
+    return (
+      <Page
+        front_img={front}
+        back_img={back}
+        pag_cuprins={e_curprins}
+        nr_pagina={index + 1}
+      />
+    );
+  })
+}
+
+<div>
+  <img src="../../public/media/pagini_carte/" alt="" />
+</div>

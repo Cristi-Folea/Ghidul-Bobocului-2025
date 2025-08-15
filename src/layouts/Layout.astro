@@ -39,7 +39,7 @@ const customTransition = {
   backwards: animation,
 };
 
-const { showfooter = true, mainClass = "" } = Astro.props;
+const { isGhid = false, showfooter = true, mainClass = "" } = Astro.props;
 ---
 
 <!doctype html>
@@ -66,6 +66,8 @@ const { showfooter = true, mainClass = "" } = Astro.props;
     </main>
 
     {showfooter && <Footer />}
+    {isGhid && <script src="../../public/scripts/ghid_animatie.js"></script>  
+               <script src="../../public/scripts/ghid_animatie_telefon.js"></script> }
   </body>
 </html>
 

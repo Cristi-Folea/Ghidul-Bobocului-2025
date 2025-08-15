@@ -1,0 +1,20 @@
+---
+const { narrow = false, pag_cuprins = false } = Astro.props;
+
+import { animatie, gotopage } from "../../public/scripts/ghid_animatie";
+import {
+  animatie_narrow,
+  gotopage_narrow,
+} from "../../public/scripts/ghid_animatie_telefon";
+
+const anim = narrow ? animatie_narrow : animatie;
+const goTo = narrow ? gotopage_narrow : gotopage;
+---
+
+{
+  pag_cuprins && (
+    <svg style="position: absolute;" width="100%" height="100%">
+      <rect></rect>
+    </svg>
+  )
+}
