@@ -1,13 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@font-face {
+  font-family: "Poppins";
+  src: url(../fonts/Poppins/Poppins-Regular.ttf);
+}
+@font-face {
+  font-family: "Poppins";
+  src: url(../fonts/Poppins/Poppins-Bold.ttf);
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url(../fonts/Poppins/Poppins-Thin.ttf);
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url(../fonts/Poppins/Poppins-Light.ttf);
+  font-weight: 300;
+}
 :root {
-  --culoare_background_dark_mode: hsl(240, 30%, 21%);
-  --culoare-background_light_mode: hsl(240, 30%, 80%);
   /* --font-roboto-mono: "Roboto", "__Roboto_Mono_43fb55",
     "__Roboto_Mono_Fallback_43fb55", "Roboto"; */
-  --font-h1: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
-    "Arial", sans-serif;
+  --font-h1: "Poppins";
 }
 
 /* "Texturina" */
@@ -20,15 +38,21 @@
 body {
   width: 100vw;
   min-height: 100vh;
-  background-color: #03120e;
-  background-image: url(../media/elemente/noise-tile-dark.svg);
+  background-color: rgb(47 93 131);
+  background-image: url(../media/elemente/bg.jpg);
+  /* background-image: url(../media/elemente/noise-tile-dark.svg); */
+
+  background-size: contain;
+  background-repeat: repeat;
+
   font-size: clamp(1rem, calc(0.2rem + 1vw), 4rem);
   font-family: var(--font-h1);
-  color: whitesmoke;
+  color: rgb(214, 157, 167);
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 a:visited {
@@ -92,6 +116,7 @@ header {
     "parteneri parteneri";
 
   grid-template-columns: 10fr 5fr;
+  grid-template-rows: auto auto auto min-content;
   padding: 1.5rem;
 }
 
@@ -111,18 +136,20 @@ header {
 .container-grid .txt {
   padding: 1em;
   grid-area: txt;
+  text-justify: distribute;
   min-height: 14em;
   line-height: 1.3em;
   /*   max-height: 15em; */
   /* overflow-x: scroll; */
   text-align: left;
   white-space: normal;
-  color: whitesmoke;
+  color: hsl(349, 80%, 90%);
 
   h1 {
     font-size: clamp(2rem, calc(0.7rem + 2vw), 4rem);
     margin-bottom: 0.5em;
     height: auto;
+    color: hsl(349, 70%, 80%);
   }
 }
 .container-grid .carte {
@@ -130,8 +157,11 @@ header {
   /* aspect-ratio: 9/16; */
   /* min-width: auto; */
   padding: 1em;
+  padding-top: 0;
   h1 {
+    font-size: clamp(2rem, calc(0.7rem + 2vw), 4rem);
     margin-bottom: 1em;
+    color: hsl(349, 70%, 80%);
   }
 }
 
@@ -144,41 +174,47 @@ header {
 }
 
 .container-grid .carte img:hover {
-  filter: brightness(1.3) drop-shadow(0 0 25px gold);
+  filter: brightness(1.3) drop-shadow(0 0 70px hsl(317, 75%, 90%));
 }
 
-.container-grid .parteneri {
-  background-image: linear-gradient(60deg, rgb(26, 26, 26), rgb(10, 10, 10));
-  /* background-color: #ff1b1b; */
-  /* backdrop-filter: blur(40px); */
+.container-grid .parteneri-wrapper {
+  min-height: 0;
   grid-area: parteneri;
-  min-height: min(3rem);
+  max-height: fit-content;
+}
+.container-grid .buton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  background-color: rgb(47, 93, 131);
+  border: 3px solid rgb(214, 157, 167);
+  border-radius: 1em;
+
+  color: hsl(349, 70%, 90%);
+  text-decoration: none;
+  font-family: var(--font-h1);
+  font-weight: 500;
+
   transition: all 0.3s ease;
 }
-.container-grid .parteneri:hover {
+
+.container-grid .buton:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(158, 89, 113, 0.6),
-    0 0 40px rgba(131, 232, 240, 0.4);
+  box-shadow: 0 0 20px rgba(131, 233, 240, 0.6),
+    0 0 60px rgba(131, 232, 240, 0.4);
 }
-
-.container-grid .border {
-  background: linear-gradient(60deg, rgb(158, 89, 113), rgb(131, 232, 240));
-  padding: 1px;
-}
-
-.container-grid .parteneri .inner {
-  background-image: linear-gradient(60deg, rgb(26, 26, 26), rgb(10, 10, 10));
-  grid-area: parteneri;
-  min-height: min(3rem);
-  min-width: 100%;
-  border-radius: calc(1em - 1px);
-}
+/* hsl(51, 90%, 60%) culoarea de aur*/
 
 .container-grid .carte.flex-column {
   flex-direction: column;
 }
+
 .harta {
   padding: 24px;
+  padding-top: 0;
   iframe {
     border-radius: 10px;
     width: 100%;
@@ -195,13 +231,17 @@ header {
     justify-content: center;
     .carte {
       max-width: 100%;
-      padding: 1em;
+      padding: 0.4em;
       justify-content: space-around;
 
       img {
         max-width: 50%;
         max-height: 50%;
       }
+    }
+
+    .parteneri-wrapper {
+      max-height: fit-content;
     }
 
     .carte.flex-column {
