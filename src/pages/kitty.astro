@@ -1,0 +1,570 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const questions = [
+  {
+    text: "Ce culoare te reprezintă cel mai bine?",
+    options: ["Roz", "Negru/Mov", "Alb/Pastel", "Galben", "Verde", "Albastru"],
+  },
+  {
+    text: "Ce fel de activitate te atrage cel mai mult?",
+    options: [
+      "Gătit sau relaxare",
+      "Petrecere sau o notă de rebeliune",
+      "Explorație în nori sau visare",
+      "Somn și confort",
+      "Aventura și energia",
+      "Șmecherie sarcastică",
+    ],
+  },
+  {
+    text: "Care mediu te inspiră cel mai mult?",
+    options: [
+      "Casă primitoare",
+      "Oraș punk/gotic",
+      "Cer și nori",
+      "Pat cocon",
+      "Pârâu/iazul vesel",
+      "Cartier cu umor",
+    ],
+  },
+  {
+    text: "Ce trăsătură te definește?",
+    options: [
+      "Blândețe",
+      "Rebel fără cauză",
+      "Subtil și visător",
+      "Calm și cozy",
+      "Energetic și optimist",
+      "Sarcastic și amuzant",
+    ],
+  },
+  {
+    text: "Ce prieten ți-ar plăcea să-ți fie?",
+    options: [
+      "Îți gătește prăjituri",
+      "Te provoacă cu umor",
+      "Te poartă peste nori",
+      "Îți oferă confort",
+      "Te încurajează să sari",
+      "Te ia peste picior cu glume",
+    ],
+  },
+];
+
+// Sistem de scoruri pentru fiecare tip de personalitate
+const personalityScores = {
+  "Hello Kitty": {
+    // ÎNTREBAREA 1 - Culoare
+    Roz: 3,
+    "Negru/Mov": 1,
+    "Alb/Pastel": 2,
+    Galben: 2,
+    Verde: 2,
+    Albastru: 1,
+
+    // ÎNTREBAREA 2 - Activitate
+    "Gătit sau relaxare": 3,
+    "Petrecere sau o notă de rebeliune": 1,
+    "Explorație în nori sau visare": 2,
+    "Somn și confort": 2,
+    "Aventura și energia": 2,
+    "Șmecherie sarcastică": 1,
+
+    // ÎNTREBAREA 3 - Mediu
+    "Casă primitoare": 3,
+    "Oraș punk/gotic": 1,
+    "Cer și nori": 2,
+    "Pat cocon": 2,
+    "Pârâu/iazul vesel": 2,
+    "Cartier cu umor": 1,
+
+    // ÎNTREBAREA 4 - Trăsătură
+    Blândețe: 3,
+    "Rebel fără cauză": 1,
+    "Subtil și visător": 2,
+    "Calm și cozy": 2,
+    "Energetic și optimist": 2,
+    "Sarcastic și amuzant": 1,
+
+    // ÎNTREBAREA 5 - Prieten
+    "Îți gătește prăjituri": 3,
+    "Te provoacă cu umor": 1,
+    "Te poartă peste nori": 2,
+    "Îți oferă confort": 2,
+    "Te încurajează să sari": 2,
+    "Te ia peste picior cu glume": 1,
+  },
+
+  Kuromi: {
+    // ÎNTREBAREA 1 - Culoare
+    Roz: 1,
+    "Negru/Mov": 3,
+    "Alb/Pastel": 1,
+    Galben: 1,
+    Verde: 1,
+    Albastru: 2,
+
+    // ÎNTREBAREA 2 - Activitate
+    "Gătit sau relaxare": 1,
+    "Petrecere sau o notă de rebeliune": 3,
+    "Explorație în nori sau visare": 1,
+    "Somn și confort": 1,
+    "Aventura și energia": 2,
+    "Șmecherie sarcastică": 2,
+
+    // ÎNTREBAREA 3 - Mediu
+    "Casă primitoare": 1,
+    "Oraș punk/gotic": 3,
+    "Cer și nori": 1,
+    "Pat cocon": 1,
+    "Pârâu/iazul vesel": 1,
+    "Cartier cu umor": 2,
+
+    // ÎNTREBAREA 4 - Trăsătură
+    Blândețe: 1,
+    "Rebel fără cauză": 3,
+    "Subtil și visător": 1,
+    "Calm și cozy": 1,
+    "Energetic și optimist": 2,
+    "Sarcastic și amuzant": 2,
+
+    // ÎNTREBAREA 5 - Prieten
+    "Îți gătește prăjituri": 1,
+    "Te provoacă cu umor": 3,
+    "Te poartă peste nori": 1,
+    "Îți oferă confort": 1,
+    "Te încurajează să sari": 2,
+    "Te ia peste picior cu glume": 2,
+  },
+
+  Cinnamoroll: {
+    // ÎNTREBAREA 1 - Culoare
+    Roz: 2,
+    "Negru/Mov": 1,
+    "Alb/Pastel": 3,
+    Galben: 2,
+    Verde: 2,
+    Albastru: 2,
+
+    // ÎNTREBAREA 2 - Activitate
+    "Gătit sau relaxare": 2,
+    "Petrecere sau o notă de rebeliune": 1,
+    "Explorație în nori sau visare": 3,
+    "Somn și confort": 2,
+    "Aventura și energia": 2,
+    "Șmecherie sarcastică": 1,
+
+    // ÎNTREBAREA 3 - Mediu
+    "Casă primitoare": 2,
+    "Oraș punk/gotic": 1,
+    "Cer și nori": 3,
+    "Pat cocon": 2,
+    "Pârâu/iazul vesel": 2,
+    "Cartier cu umor": 1,
+
+    // ÎNTREBAREA 4 - Trăsătură
+    Blândețe: 2,
+    "Rebel fără cauză": 1,
+    "Subtil și visător": 3,
+    "Calm și cozy": 2,
+    "Energetic și optimist": 2,
+    "Sarcastic și amuzant": 1,
+
+    // ÎNTREBAREA 5 - Prieten
+    "Îți gătește prăjituri": 2,
+    "Te provoacă cu umor": 1,
+    "Te poartă peste nori": 3,
+    "Îți oferă confort": 2,
+    "Te încurajează să sari": 2,
+    "Te ia peste picior cu glume": 1,
+  },
+
+  Pompompurin: {
+    // ÎNTREBAREA 1 - Culoare
+    Roz: 1,
+    "Negru/Mov": 1,
+    "Alb/Pastel": 2,
+    Galben: 3,
+    Verde: 2,
+    Albastru: 1,
+
+    // ÎNTREBAREA 2 - Activitate
+    "Gătit sau relaxare": 2,
+    "Petrecere sau o notă de rebeliune": 1,
+    "Explorație în nori sau visare": 2,
+    "Somn și confort": 3,
+    "Aventura și energia": 1,
+    "Șmecherie sarcastică": 1,
+
+    // ÎNTREBAREA 3 - Mediu
+    "Casă primitoare": 2,
+    "Oraș punk/gotic": 1,
+    "Cer și nori": 2,
+    "Pat cocon": 3,
+    "Pârâu/iazul vesel": 1,
+    "Cartier cu umor": 1,
+
+    // ÎNTREBAREA 4 - Trăsătură
+    Blândețe: 2,
+    "Rebel fără cauză": 1,
+    "Subtil și visător": 2,
+    "Calm și cozy": 3,
+    "Energetic și optimist": 1,
+    "Sarcastic și amuzant": 1,
+
+    // ÎNTREBAREA 5 - Prieten
+    "Îți gătește prăjituri": 2,
+    "Te provoacă cu umor": 1,
+    "Te poartă peste nori": 2,
+    "Îți oferă confort": 3,
+    "Te încurajează să sari": 1,
+    "Te ia peste picior cu glume": 1,
+  },
+
+  Keroppi: {
+    // ÎNTREBAREA 1 - Culoare
+    Roz: 1,
+    "Negru/Mov": 1,
+    "Alb/Pastel": 2,
+    Galben: 2,
+    Verde: 3,
+    Albastru: 2,
+
+    // ÎNTREBAREA 2 - Activitate
+    "Gătit sau relaxare": 1,
+    "Petrecere sau o notă de rebeliune": 2,
+    "Explorație în nori sau visare": 2,
+    "Somn și confort": 1,
+    "Aventura și energia": 3,
+    "Șmecherie sarcastică": 1,
+
+    // ÎNTREBAREA 3 - Mediu
+    "Casă primitoare": 1,
+    "Oraș punk/gotic": 1,
+    "Cer și nori": 2,
+    "Pat cocon": 1,
+    "Pârâu/iazul vesel": 3,
+    "Cartier cu umor": 2,
+
+    // ÎNTREBAREA 4 - Trăsătură
+    Blândețe: 2,
+    "Rebel fără cauză": 1,
+    "Subtil și visător": 2,
+    "Calm și cozy": 1,
+    "Energetic și optimist": 3,
+    "Sarcastic și amuzant": 1,
+
+    // ÎNTREBAREA 5 - Prieten
+    "Îți gătește prăjituri": 1,
+    "Te provoacă cu umor": 2,
+    "Te poartă peste nori": 2,
+    "Îți oferă confort": 1,
+    "Te încurajează să sari": 3,
+    "Te ia peste picior cu glume": 1,
+  },
+
+  "Badtz-Maru": {
+    // ÎNTREBAREA 1 - Culoare
+    Roz: 1,
+    "Negru/Mov": 2,
+    "Alb/Pastel": 1,
+    Galben: 1,
+    Verde: 1,
+    Albastru: 3,
+
+    // ÎNTREBAREA 2 - Activitate
+    "Gătit sau relaxare": 1,
+    "Petrecere sau o notă de rebeliune": 2,
+    "Explorație în nori sau visare": 1,
+    "Somn și confort": 1,
+    "Aventura și energia": 2,
+    "Șmecherie sarcastică": 3,
+
+    // ÎNTREBAREA 3 - Mediu
+    "Casă primitoare": 1,
+    "Oraș punk/gotic": 2,
+    "Cer și nori": 1,
+    "Pat cocon": 1,
+    "Pârâu/iazul vesel": 2,
+    "Cartier cu umor": 3,
+
+    // ÎNTREBAREA 4 - Trăsătură
+    Blândețe: 1,
+    "Rebel fără cauză": 2,
+    "Subtil și visător": 1,
+    "Calm și cozy": 1,
+    "Energetic și optimist": 2,
+    "Sarcastic și amuzant": 3,
+
+    // ÎNTREBAREA 5 - Prieten
+    "Îți gătește prăjituri": 1,
+    "Te provoacă cu umor": 2,
+    "Te poartă peste nori": 1,
+    "Îți oferă confort": 1,
+    "Te încurajează să sari": 2,
+    "Te ia peste picior cu glume": 3,
+  },
+};
+
+const results = {
+  "Hello Kitty": {
+    title: "Hello Kitty 🌸",
+    description: "Ești prietenoasă, caldă și mereu gata să ajuți pe ceilalți.",
+  },
+  Kuromi: {
+    title: "Kuromi 🖤",
+    description: "Ai un spirit rebel și îți place să fii diferit!",
+  },
+  Cinnamoroll: {
+    title: "Cinnamoroll ☁️",
+    description: "Ești visător și îți place să trăiești printre nori.",
+  },
+  Pompompurin: {
+    title: "Pompompurin 🍮",
+    description: "Iubești confortul și momentele cozy.",
+  },
+  Keroppi: {
+    title: "Keroppi 🐸",
+    description: "Optimist și plin de energie, aduci veselie în jurul tău.",
+  },
+  "Badtz-Maru": {
+    title: "Badtz-Maru 🐧",
+    description: "Sarcastic și amuzant, ai mereu o replică pregătită.",
+  },
+};
+---
+
+<Layout>
+  <div class="quiz-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="result" id="result" style="display: none;">
+      <div class="result-title" id="result-title"></div>
+      <div class="result-description" id="result-description"></div>
+      <button onclick="restartQuiz()" class="restart-btn"
+        >Încearcă din nou</button
+      >
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .quiz-container {
+    font-family: var(--font-h1);
+
+    /* background: linear-gradient(135deg, #ffb6c1, #ffc0cb); */
+    background-color: rgb(223 163 179);
+    background-image: url(../../public/media/elemente/noise-tile-dark.svg);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    text-align: center;
+    margin: 2rem auto;
+    position: relative;
+  }
+
+  .progress-bar {
+    background: rgb(255, 255, 255);
+    height: 12px;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .progress-fill {
+    background: linear-gradient(
+      90deg,
+      hsl(211, 100%, 54%),
+      hsl(211, 100%, 86%)
+    );
+    height: 100%;
+    transition: width 0.5s ease;
+    border-radius: 4px;
+    /* box-shadow: 0 2px 8px rgba(255, 20, 147, 0.3); */
+  }
+
+  .question {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  #options {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgb(58 92 128);
+      width: 10em;
+      height: 7em;
+      color: white;
+
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 25px;
+      cursor: pointer;
+
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-align: center;
+      transition: all 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background: #ff1493;
+      transform: translateY(-2px);
+    }
+  }
+
+  .result {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-top: 1rem;
+  }
+
+  .result-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #ff69b4;
+  }
+
+  .result-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .restart-btn {
+    background: #ff69b4;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+
+  .restart-btn:hover {
+    background: #ff1493;
+    transform: translateY(-2px);
+  }
+</style>
+
+<script is:inline define:vars={{ questions, personalityScores, results }}>
+  document.addEventListener("astro:page-load", () => {
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const resultEl = document.getElementById("result");
+    const resultTitleEl = document.getElementById("result-title");
+    const resultDescriptionEl = document.getElementById("result-description");
+    const progressEl = document.getElementById("progress");
+
+    let currentQuestion = 0;
+    const answers = [];
+
+    function updateProgress() {
+      const percentage = (currentQuestion / questions.length) * 100;
+      progressEl.style.width = percentage + "%";
+    }
+
+    function showQuestion() {
+      if (currentQuestion >= questions.length) {
+        showResult();
+        return;
+      }
+
+      updateProgress();
+      const q = questions[currentQuestion];
+      questionEl.textContent = `${currentQuestion + 1}. ${q.text}`;
+
+      optionsEl.innerHTML = "";
+      q.options.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => {
+          answers.push(opt);
+          currentQuestion++;
+          showQuestion();
+        };
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function showResult() {
+      // Calculează scorurile pentru fiecare personalitate
+      const scores = {};
+      for (const personality in personalityScores) {
+        scores[personality] = 0;
+        answers.forEach((answer) => {
+          const score = personalityScores[personality][answer];
+          if (score !== undefined) {
+            scores[personality] += score;
+          } else {
+            console.warn(`Missing score for ${personality} - ${answer}`);
+          }
+        });
+      }
+
+      // Găsește personalitatea cu cel mai mare scor
+      let maxScore = 0;
+      let winningPersonality = "Hello Kitty";
+      for (const personality in scores) {
+        if (scores[personality] > maxScore) {
+          maxScore = scores[personality];
+          winningPersonality = personality;
+        }
+      }
+
+      // Afișează rezultatul
+      const result = results[winningPersonality];
+      resultTitleEl.textContent = result.title;
+      resultDescriptionEl.textContent = result.description;
+
+      // Ascunde întrebările și afișează rezultatul
+      questionEl.style.display = "none";
+      optionsEl.style.display = "none";
+      resultEl.style.display = "block";
+      progressEl.style.width = "100%";
+
+      console.log("Răspunsuri:", answers);
+      console.log("Scoruri:", scores);
+      console.log("Câștigător:", winningPersonality);
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      answers.length = 0;
+      questionEl.style.display = "block";
+      optionsEl.style.display = "flex";
+      resultEl.style.display = "none";
+      showQuestion();
+    }
+
+    // Expune funcția global pentru butonul de restart
+    window.restartQuiz = restartQuiz;
+
+    showQuestion();
+  });
+</script>

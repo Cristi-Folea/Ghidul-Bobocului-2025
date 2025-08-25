@@ -41,16 +41,24 @@ import Layout from "../layouts/Layout.astro";
     </div>
     <div class="carte flex flex-column">
       <h1>Carte digitală:</h1>
-      <a href="/carte_ghid"></a>
-      <img
-        src="../../public/media/elemente/enchanted-magical-book-icon-isolated-3d-render-illustration.png"
-        alt="Carte PDF"
-      />
+      <div class="carte-link">
+        <a href="/carte-ghid"
+          ><img
+            src="../../public/media/elemente/enchanted-magical-book-icon-isolated-3d-render-illustration.png"
+            alt="Carte PDF"
+          /></a
+        >
+      </div>
     </div>
     <div class="parteneri-wrapper">
       <a href="/parteneri" class="buton">PARTENERI</a>
     </div>
   </div>
+  <div class="kitty-wrapper">
+    <img src="../../public/media/elemente/kitty.svg" alt="" />
+    <a href="/kitty" class="buton">Ce Hello Kitty esti?</a>
+  </div>
+
   <div class="harta">
     <iframe
       src="https://www.google.com/maps/d/u/0/embed?mid=1vu4DmU8LC0EWxM0wgFvR0wHW1zyk7iE&ehbc=2E312F&noprof=1&panel=1&sidebar=1"
@@ -70,39 +78,21 @@ import Layout from "../layouts/Layout.astro";
   }
 </style>
 
-<!-- 
-<div class="grid flex">
-  <div class="grid flex" id="banner-ghid">
-    <img src="/public/media/elemente/banner.svg" alt="" />
-  </div>
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const btn = document.querySelector(".kitty-wrapper .buton");
+    const img = document.querySelector(
+      ".kitty-wrapper img"
+    ) as HTMLImageElement | null;
 
-  <div class="container flex">
-    <div class="text"></div>
+    if (btn && img) {
+      btn.addEventListener("mouseenter", () => {
+        img.style.transform = "rotate(-50deg) scale(1.1)";
+      });
 
-    <div class="carte"></div>
-  </div>
-
-  <footer>
-    <ul class="lista">
-      <li>
-        <a href="https://bestcj.ro"></a><img
-          src="../../public/media/icons/BEST_yellow_icon.svg"
-          alt=""
-        />
-      </li>
-      <li>
-        <a href="https://bestcj.ro"></a><img
-          src="../../public/media/icons/facebook_yellow_icon.svg"
-          alt=""
-        />
-      </li>
-      <li>
-        <a href="https://bestcj.ro"></a><img
-          src="../../public/media/icons/tik_tok_yellow_icon.svg"
-          alt=""
-        />
-      </li>
-    </ul>
-  </footer>
-</div>
- -->
+      btn.addEventListener("mouseleave", () => {
+        img.style.transform = "rotate(-30deg) scale(1)";
+      });
+    }
+  });
+</script>
