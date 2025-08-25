@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/card.astro";
+import Card from "../components/Card.astro";
 ---
 
 <Layout>
@@ -9,11 +9,21 @@ import Card from "../components/card.astro";
     <h1>Mulțumim partenerilor noștri pentru tot sprijinul acordat.</h1>
   </div>
   <ul class="grid-parteneri">
-    <li><Card link="" , nume="" , scale="" , border="" /></li>
-    <li><Card link="" , nume="" , scale="" , border="" /></li>
-    <li><Card link="" , nume="" , scale="" , border="" /></li>
-    <li><Card link="" , nume="" , scale="" , border="" /></li>
-    <li><Card link="" , nume="" , scale="" , border="" /></li>
+    <li>
+      <Card
+        link=""
+        ,
+        nume="Centru de escaladă"
+        ,
+        logo="../../public/media/elemente/escalada.svg"
+        ,
+        scale="0.1"
+        ,
+        border="escalada"
+      />
+    </li>
+    <li><Card link="" , nume="" , logo="" , scale="" , border="" /></li>
+    <li><Card link="" , nume="" , logo="" , scale="" , border="" /></li>
   </ul>
 </Layout>
 

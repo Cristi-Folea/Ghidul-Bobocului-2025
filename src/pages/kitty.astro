@@ -29,7 +29,7 @@ const questions = [
     ],
   },
   {
-    text: "Ce trăsătură te definește?",
+    text: "Ce trăsătură te definește?\n",
     options: [
       "Blândețe",
       "Rebel fără cauză",
@@ -40,7 +40,7 @@ const questions = [
     ],
   },
   {
-    text: "Ce prieten ți-ar plăcea să-ți fie?",
+    text: "Cum arată pentru tine prietenul ideal?",
     options: [
       "Îți gătește prăjituri",
       "Te provoacă cu umor",
@@ -350,6 +350,10 @@ const results = {
       >
     </div>
   </div>
+  <div class="kitty-wrapper">
+    <img src="../../public/media/elemente/kitty.svg" alt="" />
+    <a href="/home_page" class="buton">Site-ul ghidului &lt3</a>
+  </div>
 </Layout>
 
 <style>
@@ -357,12 +361,14 @@ const results = {
     font-family: var(--font-h1);
 
     /* background: linear-gradient(135deg, #ffb6c1, #ffc0cb); */
-    background-color: rgb(223 163 179);
-    background-image: url(../../public/media/elemente/noise-tile-dark.svg);
+    /* background-color: rgb(223 163 179); */
+    /* background-image: url(../../public/media/elemente/noise-tile-dark.svg);
+    background-size: 1000px 1000px; */
+    background-repeat: repeat;
+
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
+    /* max-width: 800px; */
     text-align: center;
     margin: 2rem auto;
     position: relative;
@@ -379,19 +385,15 @@ const results = {
   }
 
   .progress-fill {
-    background: linear-gradient(
-      90deg,
-      hsl(211, 100%, 54%),
-      hsl(211, 100%, 86%)
-    );
+    background: linear-gradient(90deg, hsl(211, 100%, 54%), hsl(211, 90%, 66%));
     height: 100%;
-    transition: width 0.5s ease;
+    transition: width 0.8s ease;
     border-radius: 4px;
     /* box-shadow: 0 2px 8px rgba(255, 20, 147, 0.3); */
   }
 
   .question {
-    font-size: 1.7rem;
+    font-size: clamp(1.8em, calc(0.9em + 5vw), 2em);
     font-weight: bold;
     margin-bottom: 2rem;
     color: #fff;
@@ -411,24 +413,25 @@ const results = {
       align-items: center;
       justify-content: center;
 
-      background: rgb(58 92 128);
-      width: 10em;
+      flex: 1 1 180px;
+      background: hsl(344, 68%, 76%);
+      max-width: 8em;
       height: 7em;
       color: white;
 
       border: none;
-      padding: 0.8rem 2rem;
+      padding: 0.8rem 1.5rem;
       border-radius: 25px;
       cursor: pointer;
 
-      font-size: 0.9rem;
+      font-size: clamp(0.9em, calc(0.5em + 2vw), 1.3em);
       font-weight: bold;
       text-align: center;
       transition: all 0.3s ease-in-out;
     }
 
     button:hover {
-      background: #ff1493;
+      background: hsl(211, 58%, 56%);
       transform: translateY(-2px);
     }
   }
@@ -441,37 +444,101 @@ const results = {
   }
 
   .result-title {
-    font-size: 1.8rem;
+    font-size: clamp(1.8em, calc(0.9em + 5vw), 3em);
     font-weight: bold;
     margin-bottom: 1rem;
-    color: #ff69b4;
+    color: hsl(344, 68%, 76%);
   }
 
   .result-description {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     margin-bottom: 2rem;
     color: #666;
     line-height: 1.5;
   }
 
   .restart-btn {
-    background: #ff69b4;
+    background: rgb(58 92 128);
     color: white;
     border: none;
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 25px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-weight: bold;
     transition: all 0.3s;
   }
 
   .restart-btn:hover {
-    background: #ff1493;
+    background: hsl(211, 58%, 56%);
     transform: translateY(-2px);
   }
-</style>
 
+  .inapoi-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+    padding: 0 1em;
+
+    img {
+      width: clamp(8em, calc(10vw + 2em), 6em);
+      flex-grow: 1;
+      transform: rotate(-30deg);
+      filter: drop-shadow(0 0 40px rgba(214, 157, 167, 0.364));
+      transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    a {
+      flex-grow: 1;
+    }
+
+    .buton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.5em, calc(1em + 1vw), 16em);
+      text-align: center;
+      /* min-height: 10rem; */
+      /* padding: 0.75rem 1.5rem; */
+      background-color: rgb(47, 93, 131);
+      border: 3px solid rgb(214, 157, 167);
+      border-radius: 1em;
+
+      color: hsl(349, 70%, 90%);
+      text-decoration: none;
+      font-family: var(--font-h1);
+      font-weight: 500;
+
+      transition: all 0.3s ease;
+    }
+
+    .buton:hover {
+      transform: scale(1.05);
+      box-shadow:
+        0 0 20px rgba(131, 233, 240, 0.6),
+        0 0 60px rgba(131, 232, 240, 0.4);
+    }
+  }
+</style>
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const btn = document.querySelector(".kitty-wrapper .buton");
+    const img = document.querySelector(
+      ".kitty-wrapper img"
+    ) as HTMLImageElement | null;
+
+    if (btn && img) {
+      btn.addEventListener("mouseenter", () => {
+        img.style.transform = "rotate(-50deg) scale(1.1)";
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        img.style.transform = "rotate(-30deg) scale(1)";
+      });
+    }
+  });
+</script>
 <script is:inline define:vars={{ questions, personalityScores, results }}>
   document.addEventListener("astro:page-load", () => {
     const questionEl = document.getElementById("question");
