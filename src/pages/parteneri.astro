@@ -13,17 +13,77 @@ import Card from "../components/Card.astro";
       <Card
         link=""
         ,
-        nume="Centru de escaladă"
+        nume="Centrala de escaladă"
         ,
-        logo="../../public/media/elemente/escalada.svg"
+        logo="../../public/media/elemente/escalada.png"
         ,
-        scale="0.1"
+        scale="1.6"
         ,
         border="escalada"
+        ,
+        topoffset="-5px"
       />
     </li>
-    <li><Card link="" , nume="" , logo="" , scale="" , border="" /></li>
-    <li><Card link="" , nume="" , logo="" , scale="" , border="" /></li>
+    <li>
+      <Card
+        link=""
+        ,
+        nume="Jumping House"
+        ,
+        logo="../../public/media/elemente/jumping.png"
+        ,
+        scale="1"
+        ,
+        border="jumping"
+        ,
+        topoffset="2px"
+      />
+    </li>
+    <li>
+      <Card
+        link=""
+        ,
+        nume="Skateland"
+        ,
+        logo="../../public/media/elemente/skateland.png"
+        ,
+        scale="1"
+        ,
+        border="skateland"
+        ,
+        topoffset="0px"
+      />
+    </li>
+    <li>
+      <Card
+        link=""
+        ,
+        nume="War Zone"
+        ,
+        logo="../../public/media/elemente/war_zone.jpg"
+        ,
+        scale="0.95"
+        ,
+        border="war_zone"
+        ,
+        topoffset="2px"
+      />
+    </li>
+    <li>
+      <Card
+        link=""
+        ,
+        nume="Work & Travel"
+        ,
+        logo="../../public/media/elemente/see_us.jpg"
+        ,
+        scale="1"
+        ,
+        border="see_us"
+        ,
+        topoffset="0px"
+      />
+    </li>
   </ul>
 </Layout>
 
@@ -42,7 +102,7 @@ import Card from "../components/Card.astro";
     background-color: rgba(245, 245, 245, 0.065);
 
     text-align: center;
-    font-size: clamp(0.6rem, calc(0.4rem + 1vw), 1.5rem);
+    font-size: clamp(0.4rem, calc(0.4rem + 1vw), 1.5rem);
 
     display: flex;
     justify-content: center;
@@ -54,22 +114,48 @@ import Card from "../components/Card.astro";
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 3em;
+    gap: 0.5em;
     list-style: none;
 
-    border: 0.5em;
+    /* border: 0.5em;
     border-color: #37505c;
-    border-style: solid;
+    border-style: solid; */
   }
 
   .grid-parteneri > li {
-    display: flex;
+    /*   display: flex;
     align-items: center;
-    justify-content: center;
-    height: 6em;
+    justify-content: center; */
+    margin: 1em;
+    height: 10em;
     width: 28em;
     border: 0.1em;
-    border-color: aqua;
-    border-style: solid;
+    border-radius: 1em;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+
+    backdrop-filter: blur(5px);
+    filter: brightness(1.1);
+    transition: all 0.5s ease;
+
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.2),
+      inset 0 1px 2px rgba(255, 255, 255, 0.662),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.211);
+  }
+
+  .grid-parteneri > li:hover {
+    transform: scale(1.1);
+    filter: brightness(1.3);
+  }
+
+  @media (max-width: 800px) {
+    .multumire {
+      height: 9em;
+    }
+
+    .grid-parteneri > li {
+      height: 8em;
+    }
   }
 </style>
