@@ -1,31 +1,27 @@
 ---
-const { nr_foi } = Astro.props;
 import Page from "./Page.astro";
+const { number_of_pages } = Astro.props;
 
-function legare_imagini(index: number) {
-  const front = `../../public/media/pagini_carte/ghid-${2 * (index + 1) - 1}.webp`;
-  const back = `../../public/media/pagini_carte/ghid-${2 * (index + 1)}.webp`;
-  return { front, back };
-}
+let pages = [];
+for (let i = 0; i < number_of_pages; i++) {}
+
+console.log(`Number_of_pages ${number_of_pages}= `);
 ---
 
 {
-  Array.from({ length: nr_foi }).map(function (_, index) {
-    const { front, back } = legare_imagini(index);
-    const e_curprins =
-      2 * (index + 1) === 6; /* operatroul stric de egalitate */
+  Array.from({ length: number_of_pages }).map((_, i) => {
+    const page_number = i + 1;
+    const front_img = `../media/pagini_carte/ghid-${2 * page_number - 1}.webp`;
+    const back_img = `../media/pagini_carte/ghid-${2 * page_number}.webp`;
+    const is_cuprins = 2 * page_number === 6;
 
     return (
       <Page
-        front_img={front}
-        back_img={back}
-        pag_cuprins={e_curprins}
-        nr_pagina={index + 1}
+        page_number={page_number}
+        front_img={front_img}
+        back_img={back_img}
+        pagina_cuprins={is_cuprins ? "true" : "false"}
       />
     );
   })
 }
-
-<div>
-  <img src="../../public/media/pagini_carte/" alt="" />
-</div>

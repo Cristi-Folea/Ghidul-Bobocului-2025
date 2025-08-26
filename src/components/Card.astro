@@ -37,6 +37,7 @@ const {
       padding: 0.4em;
 
       .nume {
+        width: 100%;
         text-align: center;
         font-size: clamp(0.7em, calc(0.3em + 3vw), 1.7rem);
         font-weight: 700;
@@ -48,16 +49,19 @@ const {
         align-items: center;
         justify-content: center; */
         /*  position: absolute; */
+
         position: relative;
         height: 75%;
+        /*  width: 100%; */
         flex: 1;
+        overflow: hidden;
 
         img {
           width: 100%;
           height: 100%;
           object-fit: contain;
           position: absolute;
-          overflow: hidden;
+          /* overflow: hidden; */
         }
       }
 
@@ -72,5 +76,3 @@ const {
     }
   }
 </style>
-
-<!-- deci la css cu variabile, trebuie sa pun ``. iar la normal pun {} -->

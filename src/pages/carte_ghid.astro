@@ -2,18 +2,153 @@
 import Layout from "../layouts/Layout.astro";
 import Book from "../components/Book.astro";
 
-const nr_pagini = 10;
+const number_of_pages = 44;
 ---
 
-<Layout isGhid={true}>
+<Layout isGhid={true} mainClass="carte-main" showfooter={false}>
   <div class="ghid-wrapper">
-    <button id="prev" onclick=""></button>
-    <button id="next" onclick=""></button>
-    <button id="buton-cuprins" onclick="">CUPRINS</button
-    ><!-- mai trebuie pus ce sa faca la click -->
+    <div class="book-wrapper">
+      <!-- BUTON INAPOI -->
+      <button id="prev-btn" style="display:none">
+        <!-- <span class="material-symbols-outlined">arrow_back</span> -->
+      </button>
 
-    <div id="book">
-      <Book nr_foi={nr_pagini / 2} />
+      <!-- CARTEA -->
+      <div id="book" class="book">
+        <Book number_of_pages={number_of_pages} />
+      </div>
+
+      <!-- BUTON INAINTE -->
+      <button id="next-btn">
+        <!--  <span class="material-symbols-outlined">arrow_forward</span> -->
+      </button>
     </div>
   </div>
 </Layout>
+
+<style is:global>
+  @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward,arrow_forward");
+
+  :root {
+    --book-width: 396px;
+    --book-height: 559px;
+    --book-border: 3px solid powderblue;
+    --bg-page: powderblue;
+    --transition-speed: 1s;
+  }
+  .carte-main {
+    max-width: 100vw;
+    margin: 0;
+  }
+
+  .ghid-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-page);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    touch-action: manipulation;
+    overflow: hidden;
+  }
+
+  .book-wrapper {
+    position: relative;
+  }
+
+  .book {
+    position: relative;
+    width: var(--book-width);
+    height: var(--book-height);
+    transition: transform 0.5s;
+  }
+
+  .paper {
+    /* border: 1px solid red; */
+    position: absolute;
+    inset: 0;
+    perspective: 1600px;
+  }
+
+  .front,
+  .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+
+    transform-origin: left;
+    transition: transform var(--transition-speed);
+  }
+
+  .front {
+    z-index: 1;
+    border-left: var(--book-border);
+    backface-visibility: hidden;
+  }
+
+  .back {
+    z-index: 0;
+  }
+
+  .front-content,
+  .back-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .back-content {
+    transform: rotateY(180deg);
+  }
+
+  /* Flipped Foi */
+
+  .flipped .front,
+  .flipped .back {
+    transform: rotateY(-180deg);
+  }
+
+  /* Butoane */
+
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.5s;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  #prev-btn,
+  #next-btn {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  #prev-btn {
+    left: 0%;
+    display: none;
+  }
+
+  #book {
+    z-index: 0;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
