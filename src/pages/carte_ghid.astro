@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Book from "../components/Book.astro";
+import BookAllPagesNarrow from "../components/BookAllPagesNarrow.astro";
 
 const number_of_pages = 44;
+const number_of_pages_narrow = 88;
 ---
 
 <Layout isGhid={true} mainClass="carte-main" showfooter={false}>
@@ -15,6 +17,7 @@ const number_of_pages = 44;
 
       <!-- CARTEA -->
       <div id="book" class="book">
+        <button id="cuprins-btn">CUPRINS</button>
         <Book number_of_pages={number_of_pages} />
       </div>
 
@@ -22,6 +25,19 @@ const number_of_pages = 44;
       <button id="next-btn">
         <!--  <span class="material-symbols-outlined">arrow_forward</span> -->
       </button>
+    </div>
+
+    <div id="book-wrapper-narrow">
+      <button id="prev-narrow"></button>
+      <button id="next-narrow"></button>
+      <button id="buton-cuprins-narrow"> CUPRINS </button>
+
+      <div id="book-narrow">
+        <BookAllPagesNarrow numberOfPages={number_of_pages_narrow} />
+      </div>
+      <!-- end of book -->
+      <div class="right-arrow">&rarr;</div>
+      <div class="left-arrow">&larr;</div>
     </div>
   </div>
 </Layout>
@@ -34,7 +50,10 @@ const number_of_pages = 44;
     --book-height: 559px;
     --book-border: 3px solid powderblue;
     --bg-page: powderblue;
-    --transition-speed: 1s;
+    --transition-speed: 0.86s;
+
+    --buton-cuprins-width: 100px;
+    --buton-cuprins-height: 30px;
   }
   .carte-main {
     max-width: 100vw;
@@ -44,9 +63,10 @@ const number_of_pages = 44;
   .ghid-wrapper {
     width: 100vw;
     height: 100vh;
-    background-color: var(--bg-page);
+    /* background-color: var(--bg-page); */
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -142,13 +162,170 @@ const number_of_pages = 44;
     display: none;
   }
 
+  #cuprins-btn,
+  #buton-cuprins-narrow {
+    position: absolute;
+    top: calc(-1 * var(--buton-cuprins-height));
+    left: 10px;
+
+    width: var(--buton-cuprins-width);
+    height: var(--buton-cuprins-height);
+
+    font-family: "Poppins", "SF Pro Text", "SF Pro Icons", "Helvetica Neue",
+      "Helvetica", "Arial", sans-serif;
+    color: rgb(214, 157, 167);
+
+    transition:
+      left var(--transition-speed) ease,
+      transform 0.5s ease,
+      filter 0.5s ease;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.05); /* necesar pentru Safari */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); /* pentru iOS */
+    filter: brightness(1.1);
+
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.2),
+      inset 0 1px 2px rgba(255, 255, 255, 0.662),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.211);
+
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+
+    border-bottom: none;
+
+    font-size: 0.65em;
+  }
+
+  #cuprins-btn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.3);
+  }
+
   #book {
     z-index: 0;
+    position: relative;
   }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* De la Raul: */
+
+  :root {
+    --page-width: 396px;
+    --page-height: 559px;
+    --book-page-width: var(--page-width);
+    --book-page-height: var(--page-height);
+
+    --buton-cuprins-width: 100px;
+    --buton-cuprins-height: 30px;
+  }
+
+  #book-wrapper-narrow {
+    display: none;
+
+    position: relative;
+
+    width: var(--book-page-width);
+    height: var(--book-page-height);
+  }
+
+  #book-narrow {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+
+    z-index: 0;
+  }
+
+  #prev-narrow,
+  #next-narrow {
+    position: absolute;
+    top: 0;
+
+    height: 100%;
+    width: 50%;
+
+    opacity: 0;
+
+    z-index: 1;
+  }
+  #prev-narrow {
+    left: 0;
+  }
+  #next-narrow {
+    right: 0;
+  }
+
+  #buton-cuprins-narrow {
+    font-size: 1em;
+  }
+
+  .content-narrow {
+    width: 100%;
+    height: 100%;
+  }
+
+  #book-narrow {
+    position: relative;
+    perspective: 1000px;
+  }
+  #book-narrow .page-narrow {
+    transform-origin: left;
+    transition:
+      transform 2s,
+      opacity 2s;
+  }
+  #book-narrow .flipped {
+    opacity: 0;
+    transform: rotateY(-180deg);
+  }
+
+  #book-wrapper-narrow {
+    touch-action: manipulation;
+  }
+
+  .page-narrow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .page-narrow .active {
+    /*  display: block; */
+  }
+
+  @media screen and (max-width: 37.5em /* 600px */) {
+    /* small screen change display mode */
+
+    .book-wrapper {
+      display: none !important;
+    }
+    #book-wrapper-narrow {
+      display: inline !important;
+    }
+    :root {
+      --page-flip-duration: 1.5s;
+
+      --buton-cuprins-width: 150px;
+      --buton-cuprins-height: 30px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .book-wrapper {
+      transform: scale(0.7);
+    }
   }
 </style>

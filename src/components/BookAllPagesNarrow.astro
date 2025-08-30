@@ -1,0 +1,21 @@
+---
+import BookPageNarrow from "./BookPageNarrow.astro";
+const { numberOfPages } = Astro.props;
+---
+
+{
+  Array.from({ length: numberOfPages }).map((val, index) => {
+    return index + 1 === 6 ? (
+      <BookPageNarrow
+        pageNumber={index + 1}
+        img={`../media/pagini_carte/ghid-${index + 1}.webp`}
+        paginaCuprins="true"
+      />
+    ) : (
+      <BookPageNarrow
+        pageNumber={index + 1}
+        img={`../media/pagini_carte/ghid-${index + 1}.webp`}
+      />
+    );
+  })
+}

@@ -1,12 +1,15 @@
-//Referinte:
 console.log("Este incarcat ghid_animatie.js");
 const prevBtn = document.querySelector("#prev-btn");
 const nextBtn = document.querySelector("#next-btn");
 const book = document.querySelector("#book");
+const cuprinsBtn = document.querySelector("#cuprins-btn");
 
 //Event Listener
 prevBtn.addEventListener("click", () => animatie(-1));
 nextBtn.addEventListener("click", () => animatie(1));
+document.querySelector("#cuprins-btn").addEventListener("click", () => {
+  go_to_page(4);
+});
 
 let canFlip = true;
 const flipCooldown = 180; // ms
@@ -30,10 +33,16 @@ let number_of_pages = 44;
 let visible_pages = 6;
 
 let current_page = 1;
-
 let pages = [];
-
 let next_zindex = number_of_pages;
+
+// === Utilitare ===
+function getBookWidth() {
+  const width = getComputedStyle(document.documentElement).getPropertyValue(
+    "--book-width"
+  );
+  return parseInt(width); // ex: "396px" → 396
+}
 
 //Initializare o data:
 for (let i = number_of_pages; i >= 1; i--) {
@@ -42,13 +51,10 @@ for (let i = number_of_pages; i >= 1; i--) {
 
   if (i > current_page - visible_pages && i < current_page + visible_pages) {
     load_page(pages[i]);
-  } /* else {
-    unload_page(pages[i]);
-  } */
+  }
 }
 
 function load_page(page) {
-  console.log("E in load_page()");
   page.classList.add("loaded");
 
   const imgs = page.querySelectorAll("img");
@@ -67,7 +73,6 @@ function load_page(page) {
 }
 
 function unload_page(page) {
-  console.log("E in unload_page()");
   page.classList.remove("loaded");
 
   const imgs = page.querySelectorAll("img");
@@ -84,9 +89,11 @@ function unload_page(page) {
   }
 }
 
+// === Deschidere / Închidere carte ===
 function openBook() {
-  prevBtn.style.transform = "translateX(-180px)";
-  nextBtn.style.transform = "translateX(180px)";
+  const halfWidth = getBookWidth() / 2;
+  prevBtn.style.transform = `translateX(-${halfWidth}px)`;
+  nextBtn.style.transform = `translateX(${halfWidth}px)`;
 }
 
 function closeBook() {
@@ -100,19 +107,21 @@ function closeBook() {
   nextBtn.style.transform = "translateX(0px)";
 }
 
+// === Animatie pagini ===
 function animatie(stanga_dreapta, var_load_page = true) {
+  const halfWidth = getBookWidth() / 2;
+
   if (stanga_dreapta === -1) {
+    // Înapoi
     if (current_page === 1) return;
 
     if (current_page === number_of_pages + 1) {
-      book.style.transform = "translateX(50%)";
-      prevBtn.style.transform = "translateX(-180px)";
-      /* nextBtn.style.transform = "translateX(180px)"; */
+      book.style.transform = `translateX(${halfWidth}px)`;
+      prevBtn.style.transform = `translateX(-${halfWidth}px)`;
       nextBtn.style.display = "inline-block";
     }
 
     current_page--;
-    /* prevBtn.style.display = current_page === 4 ? "none" : "inline"; */
 
     if (current_page === 1) {
       book.style.transform = "translateX(0%)";
@@ -128,13 +137,12 @@ function animatie(stanga_dreapta, var_load_page = true) {
       if (current_page - visible_pages >= 1) {
         load_page(pages[current_page - visible_pages]);
       }
-
       if (current_page + visible_pages <= number_of_pages) {
         unload_page(pages[current_page + visible_pages]);
       }
     }
   } else {
-    //Urmatoarea pagina
+    // Înainte
     if (current_page === number_of_pages + 1) return;
 
     pages[current_page].classList.add("flipped");
@@ -143,8 +151,7 @@ function animatie(stanga_dreapta, var_load_page = true) {
 
     if (current_page === 1) {
       openBook();
-      book.style.transform = "translateX(50%)";
-      /* prevBtn.style.display = "inline"; */
+      book.style.transform = `translateX(${halfWidth}px)`;
       prevBtn.style.display = "inline-block";
     }
 
@@ -158,7 +165,6 @@ function animatie(stanga_dreapta, var_load_page = true) {
     }
 
     current_page++;
-    /* prevBtn.style.display = current_page === 4 ? "none" : "inline"; */
 
     if (current_page === number_of_pages + 1) {
       book.style.transform = "translateX(100%)";
@@ -166,4 +172,49 @@ function animatie(stanga_dreapta, var_load_page = true) {
       prevBtn.style.transform = "translateX(0px)";
     }
   }
+
+  cuprinsBtn.style.left = current_page <= 3 ? "10px" : "-110px";
+}
+
+async function go_to_page(pageNumber) {
+  const directie = current_page < pageNumber ? 1 : -1;
+
+  if (Math.abs(current_page - pageNumber) < visible_pages)
+    _go_to_page(pageNumber);
+  else {
+    // load pagini din jurul destinatiei
+    load_page(pages[pageNumber - 1]);
+    load_page(pages[pageNumber]);
+    load_page(pages[pageNumber + 1]);
+
+    // parcurge paginile incarcate fara a incarca altele
+    await _go_to_page(current_page + visible_pages * directie, false);
+
+    while (directie * current_page < directie * pageNumber)
+      animatie(directie, false);
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // load all pages
+    for (let i = 1; i <= number_of_pages; i++) {
+      if (i > current_page - visible_pages && i < current_page + visible_pages)
+        load_page(pages[i]);
+      else unload_page(pages[i]);
+    }
+  }
+}
+
+async function _go_to_page(pageNumber, load_pages = true) {
+  // daca trebuie sa mearga mai putin de 6 de pagini se misca mai incet
+  const flipDelay = Math.abs(pageNumber - current_page) < 6 ? 100 : 80;
+
+  async function flip() {
+    if (current_page !== pageNumber) {
+      animatie(current_page < pageNumber ? 1 : -1, load_pages);
+      await new Promise((resolve) => setTimeout(resolve, flipDelay));
+      return flip();
+    }
+  }
+
+  await flip();
 }
