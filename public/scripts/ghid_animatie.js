@@ -173,6 +173,12 @@ function animatie(stanga_dreapta, var_load_page = true) {
     }
   }
 
+  if (current_page === 4) {
+    prevBtn.style.display = "none";
+  } else {
+    prevBtn.style.display = "inline-block";
+  }
+
   cuprinsBtn.style.left = current_page <= 3 ? "10px" : "-110px";
 }
 
@@ -218,3 +224,6 @@ async function _go_to_page(pageNumber, load_pages = true) {
 
   await flip();
 }
+
+window.go_to_page = go_to_page;
+window.animatie = animatie;

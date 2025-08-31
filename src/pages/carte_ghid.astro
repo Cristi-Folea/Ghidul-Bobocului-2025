@@ -140,6 +140,9 @@ const number_of_pages_narrow = 88;
     background-color: transparent;
     cursor: pointer;
     transition: transform 0.5s;
+
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   button:focus {
@@ -155,6 +158,9 @@ const number_of_pages_narrow = 88;
     height: 100%;
     z-index: 1;
     opacity: 0;
+
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   #prev-btn {
@@ -197,7 +203,7 @@ const number_of_pages_narrow = 88;
 
     border-bottom: none;
 
-    font-size: 0.65em;
+    font-size: 0.85em;
   }
 
   #cuprins-btn:hover {
@@ -284,8 +290,8 @@ const number_of_pages_narrow = 88;
   #book-narrow .page-narrow {
     transform-origin: left;
     transition:
-      transform 2s,
-      opacity 2s;
+      transform 1s,
+      opacity 1s;
   }
   #book-narrow .flipped {
     opacity: 0;
@@ -306,7 +312,33 @@ const number_of_pages_narrow = 88;
     /*  display: block; */
   }
 
-  @media screen and (max-width: 37.5em /* 600px */) {
+  .right-arrow,
+  .left-arrow {
+    cursor: pointer;
+
+    position: absolute;
+    bottom: -15%;
+
+    font-size: 4rem;
+    color: rgb(214, 157, 167);
+    filter: drop-shadow(1px 0 0 rgb(214, 157, 167))
+      drop-shadow(-1px 0 0 rgb(214, 157, 167))
+      drop-shadow(0 1px 0 rgb(214, 157, 167))
+      drop-shadow(0 -1px 0 rgb(214, 157, 167));
+
+    z-index: 3;
+
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .right-arrow {
+    right: 20px;
+  }
+  .left-arrow {
+    left: 20px;
+  }
+
+  @media screen and (max-width: 650px /* 600px */) {
     /* small screen change display mode */
 
     .book-wrapper {
@@ -325,6 +357,16 @@ const number_of_pages_narrow = 88;
 
   @media (max-width: 800px) {
     .book-wrapper {
+      transform: scale(0.8);
+    }
+  }
+  @media (max-width: 800px) {
+    #book-wrapper-narrow {
+      transform: scale(0.8);
+    }
+  }
+  @media (max-width: 330px) {
+    #book-wrapper-narrow {
       transform: scale(0.7);
     }
   }

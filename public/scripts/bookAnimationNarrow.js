@@ -43,17 +43,6 @@ function unloadPageNarrow(page) {
   }
 }
 
-/* for (let i = numberOfPagesNarrow; i >= 1; i--) {
-  pagesNarrow[i] = document.getElementById(`page${i}-narrow`);
-  pagesNarrow[i].style.zIndex = `${numberOfPagesNarrow - i + 1}`;
-
-  if (
-    i > currentPageNarrow - visiblePagesNarrow &&
-    i < currentPageNarrow + visiblePagesNarrow
-  )
-    loadPageNarrow(pagesNarrow[i]);
-} */
-
 for (let i = 1; i <= numberOfPagesNarrow; i++) {
   const page = document.getElementById(`page${i}-narrow`);
   if (!page) continue; // dacă pagina nu există în DOM, sari peste
@@ -109,8 +98,8 @@ function animatieNarrow(id, loadPages = true) {
     pagesNarrow[currentPageNarrow++].classList.add("flipped");
   }
 
-  /* prevButtonNarrow.style.display = nextButtonNarrow.style.display =
-    currentPageNarrow === 6 ? "none" : "inline"; */
+  prevButtonNarrow.style.display = nextButtonNarrow.style.display =
+    currentPageNarrow === 6 ? "none" : "inline";
 }
 
 /* 
@@ -212,3 +201,5 @@ function _goToPageNarrow(pageNumber, loadPages = true) {
   while (currentPageNarrow !== pageNumber)
     animatieNarrow(currentPageNarrow < pageNumber ? 1 : -1, loadPages);
 }
+
+window.goToPageNarrow = goToPageNarrow;
