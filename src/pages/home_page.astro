@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
   <header id="banner">
-    <img src="/public/media/elemente/top.jpg" alt="" />
+    <img src="/media/elemente/top.jpg" alt="" />
   </header>
 
   <div class="container-grid">
@@ -44,7 +44,7 @@ import Layout from "../layouts/Layout.astro";
       <div class="carte-link">
         <a href="/carte_ghid"
           ><img
-            src="../../public/media/elemente/enchanted-magical-book-icon-isolated-3d-render-illustration.png"
+            src="/media/elemente/enchanted-magical-book-icon-isolated-3d-render-illustration.png"
             alt="Carte PDF"
           /></a
         >
@@ -55,7 +55,7 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </div>
   <div class="kitty-wrapper">
-    <img src="../../public/media/elemente/kitty.svg" alt="" />
+    <img src="/media/elemente/kitty.svg" alt="" />
     <a href="/kitty" class="buton">Ce Hello Kitty esti?</a>
   </div>
 
@@ -63,7 +63,10 @@ import Layout from "../layouts/Layout.astro";
     <iframe
       src="https://www.google.com/maps/d/u/0/embed?mid=1vu4DmU8LC0EWxM0wgFvR0wHW1zyk7iE&ehbc=2E312F&noprof=1&panel=1&sidebar=1"
       width="1280"
-      height="400"></iframe>
+      height="400"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      style="border:0;"></iframe>
   </div>
 </Layout>
 

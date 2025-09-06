@@ -2,26 +2,27 @@
 import Page from "./Page.astro";
 const { number_of_pages } = Astro.props;
 
-let pages = [];
-for (let i = 0; i < number_of_pages; i++) {}
-
-console.log(`Number_of_pages ${number_of_pages}= `);
+// Generăm array-ul de pagini pe server
+const pages = Array.from({ length: number_of_pages }, (_, i) => {
+  const page_number = i + 1;
+  return {
+    page_number,
+    front_img: `/media/pagini_carte/ghid-${2 * page_number - 1}.webp`,
+    back_img: `/media/pagini_carte/ghid-${2 * page_number}.webp`,
+    pagina_cuprins: 2 * page_number === 6,
+  };
+});
 ---
 
-{
-  Array.from({ length: number_of_pages }).map((_, i) => {
-    const page_number = i + 1;
-    const front_img = `../media/pagini_carte/ghid-${2 * page_number - 1}.webp`;
-    const back_img = `../media/pagini_carte/ghid-${2 * page_number}.webp`;
-    const is_cuprins = 2 * page_number === 6;
-
-    return (
+<div class="book-pages">
+  {
+    pages.map((page) => (
       <Page
-        page_number={page_number}
-        front_img={front_img}
-        back_img={back_img}
-        pagina_cuprins={is_cuprins}
+        page_number={page.page_number}
+        front_img={page.front_img}
+        back_img={page.back_img}
+        pagina_cuprins={page.pagina_cuprins}
       />
-    );
-  })
-}
+    ))
+  }
+</div>

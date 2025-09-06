@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+/* import { ViewTransitions } from "astro:transitions"; */
 import Footer from "../components/Footer.astro";
 
 const animation = {
@@ -50,8 +51,9 @@ const { isGhid = false, showfooter = true, mainClass = "", isCarte = false } = A
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Ghidul Bobocului</title>
-    <link rel="stylesheet" href="/public/styles/style.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
     <ClientRouter />
+   <!--  <ViewTransitions /> -->
   </head>
 
   <body>
@@ -60,8 +62,12 @@ const { isGhid = false, showfooter = true, mainClass = "", isCarte = false } = A
     </main>
 
     {showfooter && <Footer />}
-    {isGhid && <script src="../../public/scripts/ghid_animatie.js" ></script>  
-               <script src="../../public/scripts/bookAnimationNarrow.js" ></script> }
+    {isGhid && (
+        <script src="/scripts/ghid_animatie.js" is:inline></script>
+
+        <script src="/scripts/bookAnimationNarrow.js" is:inline></script>
+      
+    )}
 
   </body>
 </html>
