@@ -43,18 +43,30 @@ const customTransition = {
 const { isGhid = false, showfooter = true, mainClass = "", isCarte = false } = Astro.props;
 ---
 
-<!doctype html>
+<!Doctype html>
 <html transition:animate={customTransition}>
   <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PFHLEQLCJQ"></script>
+<script async>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PFHLEQLCJQ');
+</script>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="../../public/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Ghidul Bobocului</title>
     <link rel="stylesheet" href="/styles/style.css" />
     <ClientRouter />
    <!--  <ViewTransitions /> -->
+     
   </head>
+
+
+
 
   <body>
     <main class={mainClass}>
